@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventure entre Cités et Nature Sauvage du Nord-Ouest Pacifique </title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+      tailwind.config = {
+          theme: {
+              extend: {
+                  colors: {
+                      template: {
+                          sable: '#FFEDD5', 
+                          ocre: '#F97316',   // Orange Vibrant (Brand Accent)
+                          roche: '#0F172A',  // Bleu Nuit (Brand Dark)
+                          ciel: '#0D9488',   // Vert Lagon (Brand Primary)
+                          bg: '#FFF7ED'      // C'est un blanc cassé chaud, parfait pour la lecture et le contraste.
+                      }
+                  },
+                  fontFamily: {
+                      sans: ['"Plus Jakarta Sans"', 'sans-serif'], // Nouvelle police corps
+                      serif: ['"Outfit"', 'sans-serif'],           // Nouvelle police titres
+                  }
+              }
+          }
+      }
+    </script>
+    <style>
+        body { overflow-x: hidden; }
+        
+        /* 2. FORÇAGE DES GRAISSES (Comme sur la Landing Page) */
+        .font-sans { font-weight: 600 !important; }
+        .font-serif { font-weight: 800 !important; }
+
+        /* Ligne verticale de la timeline */
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E7EB;
+            z-index: 0;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line { left: 50%; margin-left: -1px; }
+        }
+
+        /* Style des cartes Info */
+        .tip-card {
+            border-left: 4px solid #F97316; /* ocre */
+            background-color: #FFF7ED;
+        }
+
+        /* Masquer la scrollbar de la nav mobile tout en gardant le scroll */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-template-bg text-template-roche antialiased">
+    
+    <nav id="nav-desktop" class="hidden md:flex fixed top-0 w-full z-50 bg-white/90 backdrop-blur border-b border-gray-200 py-4 px-8 justify-between items-center shadow-sm transition-transform duration-300 -translate-y-full">
+        <a href="#top" class="text-xl font-serif font-bold tracking-widest text-template-roche">MyTrip<span class="text-template-ocre">Planner</span></a>
+        <div class="space-x-6 text-sm font-bold text-gray-600">
+            <a href="#jour-1" class="nav-item-desktop hover:text-template-ocre transition">Le Parcours</a>
+            <a href="#pratique" class="nav-item-desktop hover:text-template-ocre transition">Infos Pratiques</a>
+        </div>
+    </nav>
+
+    <nav id="nav-mobile" class="md:hidden fixed top-0 w-full z-50 bg-white/95 backdrop-blur border-b border-gray-200 py-3 pl-4 overflow-x-auto hide-scroll whitespace-nowrap shadow-md transition-transform duration-300 -translate-y-full">
+        <div class="flex space-x-2 pr-4" id="mobile-menu-container">
+            <a href="#top" class="inline-block px-3 py-1 bg-template-roche text-white rounded-full text-xs font-bold shadow-sm">Top</a>
+            
+                <a href="#jour-1" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J1 Arrivée à Seattle, première immersion</a>
+            
+                <a href="#jour-2" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J2 Cœur historique et saveurs de Seattle</a>
+            
+                <a href="#jour-3" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J3 Panoramas urbains et art du verre</a>
+            
+                <a href="#jour-4" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J4 Nature urbaine et histoire de l'aviation</a>
+            
+                <a href="#jour-5" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J5 Cap sur la Péninsule Olympique</a>
+            
+                <a href="#jour-6" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J6 Forêts pluviales et lacs mystiques</a>
+            
+                <a href="#jour-7" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J7 Plages sauvages et retour vers la civilisation</a>
+            
+                <a href="#jour-8" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J8 Vers les Cascades et Leavenworth</a>
+            
+                <a href="#jour-9" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J9 Aventure alpine et saveurs bavaroises</a>
+            
+                <a href="#jour-10" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J10 Les majestueuses North Cascades</a>
+            
+                <a href="#jour-11" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J11 Vers le géant endormi: Mont Rainier</a>
+            
+                <a href="#jour-12" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J12 Randonnée au cœur du Mont Rainier</a>
+            
+                <a href="#jour-13" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J13 Exploration du côté Est du Mont Rainier</a>
+            
+                <a href="#jour-14" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J14 Cap sur les îles San Juan</a>
+            
+                <a href="#jour-15" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J15 Vie insulaire et observation marine</a>
+            
+                <a href="#jour-16" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J16 Charme d'Orcas Island et vues panoramiques</a>
+            
+                <a href="#jour-17" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J17 Retour à Seattle et soirée détente</a>
+            
+                <a href="#jour-18" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J18 Derniers instants et culture pop</a>
+            
+                <a href="#jour-19" class="mobile-link inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bold hover:bg-template-sable transition-all duration-300">J19 Départ de Seattle</a>
+            
+            <a href="#pratique" class="mobile-link inline-block px-3 py-1 border border-gray-300 text-gray-500 rounded-full text-xs font-bold">Infos</a>
+        </div>
+    </nav>
+
+    <header id="top" class="relative h-[60vh] flex items-center justify-center bg-cover bg-center"
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/header.png" || 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021'}');">
+        
+        <div class="relative z-20 text-center text-white px-4 max-w-3xl animate-fade-in-up">
+            <p class="font-sans text-template-sable tracking-[0.2em] mb-4 uppercase text-xs font-bold">Feuille de Route</p>
+            <h1 class="font-serif text-5xl md:text-8xl mb-6 leading-tight drop-shadow-lg">DU PONT- ETATS UNIS</h1>
+            <p class="font-sans text-lg md:text-xl text-gray-100 mb-10 font-medium max-w-2xl mx-auto leading-relaxed">Aventure entre Cités et Nature Sauvage du Nord-Ouest Pacifique</p>
+            
+            <div class="flex flex-wrap justify-center gap-4 text-sm font-bold mb-10">
+                <span class="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full border border-white/30 shadow-sm">🗓️ 19 jours</span>
+                <span class="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full border border-white/30 shadow-sm">💰 €7100</span>
+                <span class="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full border border-white/30 shadow-sm">🛬 5h30 depuis New York, États-Unis (vol direct)</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="itineraire" class="max-w-6xl mx-auto px-4 py-16 relative">
+        <div class="text-center mb-16">
+            <h2 class="text-template-ocre font-bold tracking-normal text-4xl mt-2 uppercase font-serif">Votre Roadtrip</h2>
+        </div>
+
+        <div class="relative">
+            <div class="timeline-line"></div>
+            
+                <div id="jour-1" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 1</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Arrivée à Seattle, première immersion</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Après votre vol depuis Antoine, États-Unis, vous atterrissez à Seattle, la vibrante métropole du Nord-Ouest Pacifique. Prenez le temps de vous installer confortablement à votre hôtel et de faire une première balade relaxante le long du front de mer, pour vous imprégner de l'ambiance portuaire et admirer les vues sur la baie de Puget Sound.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🛬 <strong>Arrivée à Seattle</strong>: Récupérez vos bagages et prenez un taxi ou le Link Light Rail jusqu'à votre hôtel au centre-ville. L'installation se fera en douceur pour commencer votre séjour.</li><li>🛏️ <strong>Installation à l'hôtel</strong>: Profitez de votre hôtel 3 étoiles pour vous rafraîchir et vous détendre après le voyage. Préparez-vous pour une découverte tranquille de la ville.</li><li>🚶‍♂️ <strong>Balade au Waterfront de Seattle</strong>: Flânez le long du front de mer, observez les ferries et les bateaux, et respirez l'air marin. C'est une excellente façon de se dégourdir les jambes et de s'acclimater.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour1.jpg" class="w-full h-64 object-cover" alt="Jour 1">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">⏰ Décalage horaire</p>
+                                <p class="text-gray-700">Le décalage horaire avec la côte Est des États-Unis est de 3 heures. Prévoyez une journée légère pour vous adapter.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🚏 Transport depuis l'aéroport</p>
+                                <p class="text-gray-700">Le Link Light Rail est une option économique et efficace pour rejoindre le centre-ville depuis l'aéroport Sea-Tac.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-2" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ocre rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 2</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Cœur historique et saveurs de Seattle</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Plongez dans l'effervescence du marché emblématique de Seattle, où les saveurs et les couleurs se mêlent. Ensuite, explorez les mystères du passé de la ville en vous aventurant dans ses passages souterrains, témoins d'une histoire fascinante et parfois insolite. Une journée riche en découvertes culinaires et historiques vous attend.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🛍️ <strong>Visite du Pike Place Market</strong>: Explorez ce marché historique et animé, célèbre pour ses poissonniers volants et ses artisans locaux. Dégustez des spécialités régionales et imprégnez-vous de l'ambiance unique.</li><li>🚶‍♀️ <strong>Seattle Underground Tour</strong>: Découvrez l'histoire insolite de Seattle en explorant ses rues souterraines, vestiges de la ville originale. C'est une plongée fascinante dans le passé de la cité.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour2.jpg" class="w-full h-64 object-cover" alt="Jour 2">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">💰 Pourboires</p>
+                                <p class="text-gray-700">Aux États-Unis, les pourboires sont une part importante du salaire dans le secteur des services. Prévoyez 15-20% pour les restaurants et les taxis.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">☕ Café culture</p>
+                                <p class="text-gray-700">Seattle est le berceau de Starbucks, mais explorez aussi les nombreux cafés indépendants pour une expérience locale authentique.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-3" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ciel rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 3</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Panoramas urbains et art du verre</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Montez au sommet de l'emblématique Space Needle pour des vues panoramiques à couper le souffle sur Seattle et ses environs, des montagnes aux îles. Ensuite, laissez-vous émerveiller par la beauté et la complexité des œuvres d'art en verre de Dale Chihuly, une expérience visuelle inoubliable qui stimule l'imagination. Une journée entre ciel et art.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🗼 <strong>Ascension de la Space Needle</strong>: Profitez d'une vue à 360 degrés sur la ville, le Mont Rainier et la baie de Puget Sound depuis cette icône de Seattle. La plateforme d'observation offre des perspectives incroyables.</li><li>🎨 <strong>Visite du Chihuly Garden and Glass</strong>: Admirez les sculptures de verre époustouflantes de Dale Chihuly, exposées dans un jardin luxuriant et des galeries intérieures. C'est une explosion de couleurs et de formes.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour3.jpg" class="w-full h-64 object-cover" alt="Jour 3">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🎟️ Billets combinés</p>
+                                <p class="text-gray-700">Pensez à acheter un billet combiné pour la Space Needle et le Chihuly Garden and Glass pour économiser du temps et de l'argent.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🚶 Quartier de Seattle Center</p>
+                                <p class="text-gray-700">Ces deux attractions sont situées dans le quartier de Seattle Center, facilement accessible à pied ou en monorail depuis le centre-ville.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-4" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 4</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Nature urbaine et histoire de l'aviation</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Échappez à l'agitation de la ville en vous promenant dans un vaste parc urbain offrant des vues imprenables sur l'eau et les montagnes. L'après-midi, plongez dans l'histoire fascinante de l'aviation, des pionniers aux engins spatiaux, en explorant une collection impressionnante d'aéronefs. Une journée équilibrée entre sérénité naturelle et prouesses technologiques.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚶‍♀️ <strong>Randonnée à Discovery Park</strong>: Profitez de la nature sauvage en plein cœur de la ville avec des sentiers côtiers et des vues magnifiques sur le détroit de Puget. C'est le plus grand parc urbain de Seattle.</li><li>✈️ <strong>Visite du Museum of Flight</strong>: Explorez l'histoire de l'aviation et de l'exploration spatiale avec une collection impressionnante d'avions et d'artefacts. Vous pourrez même monter à bord de certains appareils.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour4.jpg" class="w-full h-64 object-cover" alt="Jour 4">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🚌 Accès au Museum of Flight</p>
+                                <p class="text-gray-700">Le Museum of Flight est situé au sud de Seattle, accessible en bus ou en voiture de location.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">👟 Chaussures confortables</p>
+                                <p class="text-gray-700">Prévoyez des chaussures de marche confortables pour Discovery Park, car les sentiers peuvent être longs et vallonnés.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-5" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ocre rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 5</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Cap sur la Péninsule Olympique</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Quittez l'effervescence de Seattle pour vous diriger vers la majestueuse Péninsule Olympique, un écrin de nature sauvage. La route vous mènera à travers des paysages variés avant d'atteindre Port Angeles, votre porte d'entrée vers le Parc National Olympique. L'après-midi, une ascension vers Hurricane Ridge vous offrira des panoramas montagneux inoubliables.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚗 <strong>Route vers Port Angeles</strong>: Louez une voiture et prenez le ferry de Seattle à Bainbridge Island, puis continuez la route vers Port Angeles. Le trajet offre de belles vues.</li><li>⛰️ <strong>Exploration de Hurricane Ridge</strong>: Montez à Hurricane Ridge pour des vues panoramiques spectaculaires sur les montagnes olympiques et le détroit de Juan de Fuca. Des sentiers de randonnée faciles sont disponibles.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour5.jpg" class="w-full h-64 object-cover" alt="Jour 5">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🚘 Location de voiture</p>
+                                <p class="text-gray-700">Une voiture est indispensable pour explorer la Péninsule Olympique et les parcs nationaux. Réservez-la à l'avance.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">⛴️ Ferry</p>
+                                <p class="text-gray-700">Vérifiez les horaires du ferry Seattle-Bainbridge Island à l'avance, surtout en haute saison.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-6" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ciel rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 6</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Forêts pluviales et lacs mystiques</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Aujourd'hui, plongez au cœur de la forêt pluviale de Hoh, un écosystème unique où la mousse et les fougères créent une atmosphère enchantée. L'après-midi, découvrez la beauté sereine du lac Crescent, avec ses eaux d'un bleu profond et ses légendes locales. Une journée d'immersion totale dans la nature luxuriante de la Péninsule Olympique.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🌿 <strong>Randonnée dans la Hoh Rain Forest</strong>: Explorez les sentiers de cette forêt pluviale tempérée, où les arbres géants sont recouverts de mousse et de lichens. Le "Hall of Mosses" est un incontournable.</li><li>💧 <strong>Détente au Lake Crescent</strong>: Profitez de la beauté paisible de ce lac glaciaire aux eaux cristallines. Vous pouvez faire une courte promenade ou simplement vous détendre au bord de l'eau.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour6.jpg" class="w-full h-64 object-cover" alt="Jour 6">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🌧️ Météo</p>
+                                <p class="text-gray-700">La forêt pluviale de Hoh reçoit beaucoup de précipitations. Prévoyez des vêtements imperméables, même en été.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🦟 Insectes</p>
+                                <p class="text-gray-700">En été, les moustiques peuvent être présents. Un répulsif est recommandé, surtout près des zones humides.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-7" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 7</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Plages sauvages et retour vers la civilisation</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Commencez la journée par l'exploration des plages accidentées du Pacifique, où les troncs d'arbres échoués et les formations rocheuses créent un paysage dramatique. L'après-midi, entamez votre retour vers l'est, en direction de la région de Tacoma, pour une étape stratégique avant de nouvelles aventures. Une journée entre la puissance de l'océan et la transition vers de nouveaux horizons.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🏖️ <strong>Découverte de Ruby Beach</strong>: Promenez-vous sur cette plage emblématique, célèbre pour ses stacks rocheux et son bois flotté. C'est un endroit idéal pour la photographie et la contemplation.</li><li>🚗 <strong>Route vers Tacoma</strong>: Reprenez la route vers l'est, en contournant le sud de la Péninsule Olympique, pour rejoindre Tacoma. Cette ville sera votre point de chute pour la nuit, réduisant le trajet du lendemain.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour7.jpg" class="w-full h-64 object-cover" alt="Jour 7">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1"> tides Marées</p>
+                                <p class="text-gray-700">Vérifiez les horaires des marées avant de visiter les plages pour profiter pleinement de l'exploration des rochers et des piscines naturelles.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">⛽ Stations-service</p>
+                                <p class="text-gray-700">Les stations-service sont rares sur la côte ouest de la Péninsule. Faites le plein à Forks ou Port Angeles.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-8" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ocre rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 8</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Vers les Cascades et Leavenworth</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Aujourd'hui, votre voyage vous mène des paysages côtiers aux majestueuses montagnes des Cascades. La route panoramique vous fera traverser des forêts denses et des vallées verdoyantes. Votre destination est Leavenworth, une charmante ville transformée en village bavarois, offrant une ambiance unique et dépaysante au cœur de l'État de Washington.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚗 <strong>Route vers Leavenworth</strong>: Quittez Tacoma et prenez la route scénique vers l'est, traversant les montagnes des Cascades. Le trajet est magnifique et offre de nombreux points de vue.</li><li>🏘️ <strong>Découverte de Leavenworth</strong>: Explorez ce village alpin bavarois unique en son genre, avec ses façades peintes, ses brasseries et ses boutiques. Profitez de l'ambiance festive.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour8.jpg" class="w-full h-64 object-cover" alt="Jour 8">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🥨 Spécialités locales</p>
+                                <p class="text-gray-700">À Leavenworth, ne manquez pas de goûter aux saucisses bavaroises, aux bretzels géants et à la bière locale.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🛣️ Routes de montagne</p>
+                                <p class="text-gray-700">Soyez attentif aux conditions routières, surtout en début ou fin de saison, car certaines routes de montagne peuvent être fermées.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-9" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ciel rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 9</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Aventure alpine et saveurs bavaroises</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Profitez de la matinée pour une randonnée revigorante dans les environs de Leavenworth, où les sentiers serpentent à travers des forêts de pins et offrent des vues sur les sommets environnants. L'après-midi est dédiée à l'exploration plus approfondie du village bavarois, avec ses boutiques artisanales et ses délices culinaires. Une journée entre nature et culture.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚶‍♂️ <strong>Randonnée près de Leavenworth</strong>: Choisissez un sentier adapté à votre niveau, comme le Waterfront Park Trail ou un sentier plus exigeant dans les montagnes environnantes. La nature est omniprésente.</li><li>🍻 <strong>Dégustation et shopping à Leavenworth</strong>: Flânez dans les rues, visitez les boutiques de souvenirs et dégustez une bière locale dans l'une des brasseries. Imprégnez-vous de l'atmosphère.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour9.jpg" class="w-full h-64 object-cover" alt="Jour 9">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">💧 Hydratation</p>
+                                <p class="text-gray-700">L'air en montagne peut être sec. Pensez à boire beaucoup d'eau pendant vos randonnées.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">☀️ Protection solaire</p>
+                                <p class="text-gray-700">Même par temps nuageux, le soleil en altitude peut être intense. Crème solaire et chapeau sont recommandés.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-10" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 10</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Les majestueuses North Cascades</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Aujourd'hui, préparez-vous à être émerveillé par la beauté sauvage du Parc National des North Cascades. Ses sommets déchiquetés, ses glaciers scintillants et ses lacs aux eaux turquoise créent un paysage alpin spectaculaire. Vous explorerez des points de vue emblématiques et ferez de courtes promenades pour admirer la grandeur de cette région préservée. Une journée de pure immersion montagnarde.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>📸 <strong>Diablo Lake Overlook</strong>: Arrêtez-vous à ce point de vue pour admirer les eaux turquoise du lac Diablo, dont la couleur est due aux minéraux glaciaires. C'est un spectacle inoubliable.</li><li>🚶‍♀️ <strong>Randonnée à Gorge Creek Falls</strong>: Faites une courte promenade facile jusqu'à la cascade de Gorge Creek, offrant de belles vues sur la rivière et le canyon. Une pause rafraîchissante.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour10.jpg" class="w-full h-64 object-cover" alt="Jour 10">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🐻 Faune sauvage</p>
+                                <p class="text-gray-700">Les North Cascades abritent des ours noirs et des grizzlis. Renseignez-vous sur les précautions à prendre et gardez vos distances.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🗺️ Cartes hors ligne</p>
+                                <p class="text-gray-700">La couverture cellulaire est limitée dans le parc. Téléchargez des cartes et des informations à l'avance.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-11" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ocre rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 11</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Vers le géant endormi: Mont Rainier</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Quittez les North Cascades pour vous diriger vers le sud, en direction du majestueux Parc National du Mont Rainier. Ce volcan endormi domine le paysage de l'État de Washington et offre des panoramas spectaculaires. Votre première étape sera le centre des visiteurs de Paradise, un lieu emblématique pour admirer les prairies alpines et les glaciers. Une journée de transition vers un nouveau géant naturel.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚗 <strong>Route vers le Mont Rainier</strong>: Conduisez vers le sud-est pour atteindre le Parc National du Mont Rainier. Le trajet offre des vues changeantes et de belles forêts.</li><li>🏞️ <strong>Visite du Paradise Visitor Center</strong>: Explorez le centre des visiteurs de Paradise, point de départ de nombreuses randonnées et offrant des vues imprenables sur le Mont Rainier. C'est un excellent point d'information.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour11.jpg" class="w-full h-64 object-cover" alt="Jour 11">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">⬆️ Altitude</p>
+                                <p class="text-gray-700">Paradise est à environ 1600 mètres d'altitude. Prenez votre temps pour vous acclimater et éviter le mal des montagnes.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🌸 Fleurs sauvages</p>
+                                <p class="text-gray-700">En été (juillet-août), les prairies de Paradise sont recouvertes de fleurs sauvages, un spectacle magnifique.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-12" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ciel rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 12</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Randonnée au cœur du Mont Rainier</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Aujourd'hui est dédié à l'exploration des sentiers emblématiques du Mont Rainier. La randonnée sur le Skyline Trail vous mènera à travers des paysages alpins époustouflants, avec des vues imprenables sur le volcan, les glaciers et les vallées. L'après-midi, une visite au Reflection Lake offrira une opportunité de capturer des images parfaites du Mont Rainier se reflétant dans ses eaux calmes. Une journée de pure beauté naturelle.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🥾 <strong>Randonnée sur le Skyline Trail</strong>: Partez pour une randonnée mémorable sur ce sentier populaire qui offre des vues spectaculaires sur le Mont Rainier, les glaciers et les prairies alpines. Plusieurs boucles sont possibles.</li><li>📸 <strong>Visite de Reflection Lake</strong>: Faites un arrêt rapide à Reflection Lake pour admirer et photographier le Mont Rainier se reflétant parfaitement dans ses eaux calmes. C'est un lieu emblématique.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour12.jpg" class="w-full h-64 object-cover" alt="Jour 12">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🧥 Vêtements en couches</p>
+                                <p class="text-gray-700">La météo en montagne peut changer rapidement. Prévoyez plusieurs couches de vêtements pour vous adapter aux variations de température.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🥾 Chaussures de randonnée</p>
+                                <p class="text-gray-700">Des chaussures de randonnée robustes et confortables sont essentielles pour les sentiers du Mont Rainier.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-13" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 13</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Exploration du côté Est du Mont Rainier</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Après avoir exploré le côté ouest, dirigez-vous vers l'est du parc national pour découvrir d'autres merveilles. Le Grove of the Patriarchs vous transportera dans une forêt ancienne de cèdres géants, tandis que les sources chaudes d'Ohanapecosh offriront un aperçu de l'activité géothermique de la région. Une journée pour apprécier la diversité des paysages du Mont Rainier.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🌳 <strong>Promenade au Grove of the Patriarchs</strong>: Traversez un pont suspendu pour explorer cette forêt ancienne abritant des cèdres et des sapins de Douglas millénaires. C'est une expérience majestueuse.</li><li>♨️ <strong>Découverte des Ohanapecosh Hot Springs</strong>: Visitez les sources chaudes naturelles d'Ohanapecosh, bien que non baignables, elles témoignent de l'activité volcanique sous le Mont Rainier.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour13.jpg" class="w-full h-64 object-cover" alt="Jour 13">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🅿️ Stationnement</p>
+                                <p class="text-gray-700">Le stationnement peut être limité aux points d'intérêt populaires, surtout en haute saison. Arrivez tôt.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🗺️ Plan du parc</p>
+                                <p class="text-gray-700">Procurez-vous un plan détaillé du parc à l'entrée ou au centre des visiteurs pour bien vous orienter.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-14" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ocre rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 14</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Cap sur les îles San Juan</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Quittez les montagnes pour une nouvelle aventure maritime. Votre destination est les magnifiques îles San Juan, un archipel réputé pour sa faune marine et ses paysages côtiers. La journée commence par la route vers Anacortes, d'où vous prendrez un ferry pittoresque pour rejoindre Friday Harbor, le cœur de San Juan Island. Une transition douce vers la vie insulaire.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚗 <strong>Route vers Anacortes</strong>: Conduisez depuis le Mont Rainier vers le nord-ouest jusqu'à Anacortes, le point de départ des ferries pour les îles San Juan. Le trajet est long mais varié.</li><li>🚢 <strong>Ferry vers Friday Harbor</strong>: Prenez le ferry de Washington State Ferries pour Friday Harbor sur San Juan Island. Profitez des vues sur les îles et la mer pendant la traversée.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour14.jpg" class="w-full h-64 object-cover" alt="Jour 14">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🎫 Réservation de ferry</p>
+                                <p class="text-gray-700">Il est fortement recommandé de réserver votre place sur le ferry à l'avance, surtout si vous voyagez avec une voiture, car les places sont limitées.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">⏱️ Temps de trajet</p>
+                                <p class="text-gray-700">Le trajet en voiture jusqu'à Anacortes est long (environ 3-4h). Prévoyez de partir tôt.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-15" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ciel rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 15</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Vie insulaire et observation marine</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Aujourd'hui est dédié à la découverte de la richesse marine des îles San Juan. Embarquez pour une excursion d'observation des baleines, avec l'espoir d'apercevoir des orques, des phoques et d'autres créatures marines. L'après-midi, explorez le Lime Kiln State Park, un lieu privilégié pour l'observation des baleines depuis la terre ferme et pour profiter des paysages côtiers. Une journée inoubliable au contact de la faune.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🐳 <strong>Excursion d'observation des baleines</strong>: Participez à une excursion en bateau pour observer les orques, les phoques, les marsouins et d'autres animaux marins. C'est une expérience magique.</li><li>灯 <strong>Visite de Lime Kiln State Park</strong>: Rendez-vous à ce parc, souvent appelé "Whale Watch Park", pour observer les orques depuis la côte et profiter des vues sur le phare historique.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour15.jpg" class="w-full h-64 object-cover" alt="Jour 15">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🗓️ Meilleure période pour les orques</p>
+                                <p class="text-gray-700">La meilleure période pour observer les orques résidentes est de mai à septembre, mais leur présence n'est jamais garantie.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🧥 Vêtements chauds</p>
+                                <p class="text-gray-700">Même en été, il peut faire frais et venteux en mer. Prévoyez des couches chaudes pour l'excursion en bateau.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-16" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 16</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Charme d'Orcas Island et vues panoramiques</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Après San Juan Island, prenez un court ferry pour Orcas Island, la plus grande et la plus montagneuse des îles San Juan. La journée sera consacrée à l'exploration de ses paysages verdoyants et à l'ascension du Mont Constitution, le point culminant de l'archipel, offrant des vues panoramiques spectaculaires. Une journée de sérénité et de panoramas à couper le souffle.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>⛴️ <strong>Ferry vers Orcas Island</strong>: Prenez un ferry inter-îles depuis Friday Harbor pour rejoindre Orcas Island. La traversée est courte et agréable.</li><li>🏞️ <strong>Ascension du Mont Constitution</strong>: Conduisez ou faites une randonnée jusqu'au sommet du Mont Constitution pour des vues panoramiques sur l'archipel, le détroit de Juan de Fuca et même le Mont Baker.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour16.jpg" class="w-full h-64 object-cover" alt="Jour 16">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🧘 Ambiance d'Orcas Island</p>
+                                <p class="text-gray-700">Orcas Island est réputée pour son ambiance plus décontractée et artistique que San Juan Island. Profitez de la tranquillité.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🍴 Dîner à Eastsound</p>
+                                <p class="text-gray-700">Le village d'Eastsound sur Orcas Island offre de charmants restaurants et galeries d'art pour votre soirée.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-17" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ocre rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 17</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Retour à Seattle et soirée détente</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Après avoir savouré la quiétude des îles San Juan, il est temps de reprendre le ferry pour Anacortes et de retourner vers l'effervescence de Seattle. Profitez du trajet pour repenser à toutes les merveilles découvertes. Une fois de retour en ville, installez-vous et offrez-vous une soirée relaxante, peut-être avec un bon dîner pour célébrer la fin de cette belle aventure.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🚢 <strong>Ferry retour vers Anacortes</strong>: Reprenez le ferry depuis Orcas Island ou San Juan Island (selon votre choix) vers Anacortes. Profitez une dernière fois des paysages marins.</li><li>🚗 <strong>Route vers Seattle</strong>: Conduisez d'Anacortes à Seattle. Le trajet prend environ 1h30 à 2h, selon le trafic.</li><li>🍽️ <strong>Dîner relaxant à Seattle</strong>: Offrez-vous un bon dîner dans l'un des nombreux restaurants de Seattle pour conclure cette journée de voyage.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour17.jpg" class="w-full h-64 object-cover" alt="Jour 17">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🎁 Souvenirs</p>
+                                <p class="text-gray-700">Profitez de votre retour à Seattle pour acheter les derniers souvenirs de votre voyage.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🚦 Trafic</p>
+                                <p class="text-gray-700">Le trafic peut être dense aux abords de Seattle, surtout aux heures de pointe. Prévoyez une marge de temps.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-18" class="section-etape relative z-10 mb-20 md:flex  md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-ciel rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-right md:pr-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 18</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Derniers instants et culture pop</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Pour votre avant-dernier jour, plongez dans la culture pop et l'innovation artistique de Seattle. Le Museum of Pop Culture (MoPOP) vous transportera dans l'univers de la musique, du cinéma et des jeux vidéo. L'après-midi, une visite au Fremont Troll vous offrira une touche d'originalité et d'art urbain. Une journée pour explorer les facettes modernes et excentriques de la ville.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🎶 <strong>Visite du MoPOP (Museum of Pop Culture)</strong>: Explorez ce musée interactif dédié à la musique, la science-fiction et la culture pop. Ses expositions sont souvent innovantes et captivantes.</li><li>🗿 <strong>Découverte du Fremont Troll</strong>: Rendez-vous dans le quartier de Fremont pour admirer cette sculpture géante sous un pont. C'est une œuvre d'art publique insolite et amusante.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pl-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour18.jpg" class="w-full h-64 object-cover" alt="Jour 18">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🎨 Quartier de Fremont</p>
+                                <p class="text-gray-700">Fremont est connu pour son esprit bohème et ses œuvres d'art publiques. C'est un quartier agréable pour se promener.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🛍️ Shopping de dernière minute</p>
+                                <p class="text-gray-700">Profitez de cette journée pour faire du shopping de dernière minute dans les boutiques du centre-ville ou de Fremont.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+                <div id="jour-19" class="section-etape relative z-10 mb-20 md:flex md:flex-row-reverse md:justify-between items-start group scroll-mt-32">
+                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-template-roche rounded-full border-4 border-white shadow-lg flex items-center justify-center z-20"></div>
+                    
+                    <div class="md:w-[45%] pl-14 md:text-left md:pl-12">
+                        <span class="font-serif text-3xl block text-template-roche mb-2 font-bold">Jour 19</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Départ de Seattle</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed italic mb-4">Après 19 jours d'aventures inoubliables entre les villes vibrantes, les forêts pluviales luxuriantes, les sommets enneigés et les îles paisibles de l'État de Washington, il est temps de faire vos adieux. Profitez d'un dernier petit-déjeuner américain avant de vous diriger vers l'aéroport pour votre vol de retour vers Antoine, États-Unis, la tête pleine de souvenirs.</p>
+                        <ul class="text-sm text-gray-700 space-y-2 inline-block text-left font-medium">
+                            <li>🍳 <strong>Dernier petit-déjeuner</strong>: Savourez un dernier petit-déjeuner typiquement américain avant de quitter Seattle.</li><li>✈️ <strong>Transfert à l'aéroport</strong>: Prenez le Link Light Rail ou un taxi pour l'aéroport international de Seattle-Tacoma (SEA) pour votre vol de retour.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pl-14 md:w-[45%] mt-6 md:mt-0 md:pr-12">
+                        <div class="rounded-xl overflow-hidden shadow-lg mb-4">
+                            <img src="https://raw.githubusercontent.com/mytripplanner-dotfr/Dupont-etats-unis-1dl9u9u7g96xfw3/main/jour19.jpg" class="w-full h-64 object-cover" alt="Jour 19">
+                        </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🛄 Bagages</p>
+                                <p class="text-gray-700">Assurez-vous que vos bagages respectent les limites de poids et de taille de votre compagnie aérienne.</p>
+                            </div>
+                        
+                            <div class="tip-card p-4 rounded-r-lg text-sm mb-2">
+                                <p class="font-bold text-template-ocre mb-1">🛂 Formalités</p>
+                                <p class="text-gray-700">Prévoyez suffisamment de temps pour les formalités d'enregistrement et de sécurité à l'aéroport.</p>
+                            </div>
+                        
+                    </div>
+                </div>
+                
+        </div>
+    </section>
+
+    <section id="pratique" class="bg-white border-t border-gray-200 pt-12 pb-12 scroll-mt-24">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+            <div>
+                <h4 class="font-serif text-xl mb-4 text-template-roche flex items-center gap-2 font-bold">
+                    <span>💴</span> Budget
+                </h4>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2"><strong>Budget vol: </strong>€630/pers (vol aller-retour en classe économique depuis New York, États-Unis)</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2"><strong>Budget transports: </strong>€1370/pers (location de voiture, essence, ferries, transports en commun)</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2"><strong>Budget repas: </strong>€1450/pers (repas de type moyen, incluant quelques restaurants et repas rapides)</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2"><strong>Budget logement: </strong>€3000/pers (19 nuits en hôtels 3 étoiles)</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2"><strong>Budget activités: </strong>€650/pers (entrées parcs nationaux, musées, excursions, etc.)</p>
+                
+            </div>
+            <div>
+                <h4 class="font-serif text-xl mb-4 text-template-roche flex items-center gap-2 font-bold">
+                    <span>☀️</span> Périodes Idéales
+                </h4>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2">Les périodes idéales pour ce séjour sont les mois de mai à juin et de septembre à octobre.</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2">Ces mois offrent un climat agréable, moins de foules et des paysages magnifiques, notamment pour les randonnées.</p>
+                
+            </div>
+            <div>
+                <h4 class="font-serif text-xl mb-4 text-template-roche flex items-center gap-2 font-bold">
+                    <span>📃</span> Infos pratiques
+                </h4>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2">🛂 Les États-Unis exigent un ESTA (Electronic System for Travel Authorization) pour les citoyens des pays éligibles. Faites votre demande en ligne avant votre départ.</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2">💳 La monnaie est le dollar américain ($USD). Les cartes de crédit sont largement acceptées, mais prévoyez un peu de liquide pour les petites dépenses.</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2">🚗 La conduite se fait à droite. Le permis de conduire français est généralement accepté pour une courte durée, mais un permis international est recommandé.</p>
+                
+                    <p class="text-sm text-gray-600 leading-relaxed mb-2">👥 La population de l'État de Washington est diverse et accueillante. Les habitants sont souvent fiers de leur nature environnante et de leur culture du café.</p>
+                
+            </div>            
+            <div>
+                <h4 class="font-serif text-xl mb-4 text-template-roche flex items-center gap-2 font-bold">
+                    <span>🔗</span> Liens Utiles
+                </h4>
+                <ul class="text-sm space-y-3">
+                  <li><a href="https://mytripplanner-dotfr.github.io/Dupont-etats-unis-1dl9u9u7g96xfw3/map.html" target="_blank" class="hover:text-template-ocre transition flex items-center gap-2"><strong>🗺️ Carte Interactive</strong></a></li>
+                    
+                        <li><a href="https://www.visittheusa.fr/" target="_blank" class="hover:text-template-ocre transition flex items-center gap-2"><strong>📘 Visit The USA</strong></a></li>
+                    
+                        <li><a href="https://www.nps.gov/index.htm" target="_blank" class="hover:text-template-ocre transition flex items-center gap-2"><strong>🏞️ National Park Service</strong></a></li>
+                    
+                        <li><a href="https://www.weather.gov/sew/" target="_blank" class="hover:text-template-ocre transition flex items-center gap-2"><strong>🌤️ National Weather Service</strong></a></li>
+                    
+                        <li><a href="https://wsdot.wa.gov/travel/washington-state-ferries" target="_blank" class="hover:text-template-ocre transition flex items-center gap-2"><strong>⛴️ Washington State Ferries</strong></a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-50 border-t border-slate-200 py-6">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="font-serif text-lg text-template-roche mb-2 font-bold">
+                MyTrip<span class="text-template-ocre">Planner</span>
+            </p>
+
+                <div class="flex justify-center gap-4 text-[10px] md:text-xs text-slate-500 mb-4 font-semibold">
+                    <a href="#" class="hover:text-brand-primary transition hover:underline">Mentions Légales</a>
+                    <a href="#" class="hover:text-brand-primary transition hover:underline">CGU</a>
+                    <a href="#" class="hover:text-brand-primary transition hover:underline">Confidentialité</a>
+                </div>
+
+            <p class="text-[10px] text-gray-400 mb-2">
+                &copy; 2025 MyTripPlanner. Tous droits réservés.
+            </p>
+
+            <div class="flex justify-center">
+                <p class="text-[10px] text-gray-400 uppercase tracking-widest px-2 py-0.5 border border-gray-200 rounded-full inline-block">
+                    🤖 Contenu généré par IA
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gestion Scroll & Menu
+        const navDesktop = document.getElementById('nav-desktop');
+        const navMobile = document.getElementById('nav-mobile');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                navDesktop.classList.remove('-translate-y-full');
+                navMobile.classList.remove('-translate-y-full');
+            } else {
+                navDesktop.classList.add('-translate-y-full');
+                navMobile.classList.add('-translate-y-full');
+            }
+        });
+        
+        // Active Link Highlighter
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.id;
+                    document.querySelectorAll('.mobile-link').forEach(link => {
+                        const linkHref = link.getAttribute('href').substring(1);
+                        if (linkHref === activeId) {
+                            link.classList.remove('bg-gray-100', 'text-gray-700');
+                            link.classList.add('bg-template-ocre', 'text-white', 'shadow-md');
+                            link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        } else {
+                            link.classList.add('bg-gray-100', 'text-gray-700');
+                            link.classList.remove('bg-template-ocre', 'text-white', 'shadow-md');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -60% 0px' });
+
+        document.querySelectorAll('div[id^="jour-"], section#pratique').forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>
