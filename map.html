@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte du voyage - Dupont etats unis</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    #map { height: 100vh; width: 100%; }
+    .info-window { max-width: 250px; font-family: Arial, sans-serif; }
+    .info-window img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px; }
+    .info-window h3 { margin: 0 0 5px 0; font-size: 16px; color: #333; }
+    .info-window p { margin: 5px 0; font-size: 14px; color: #666; }
+    .info-window a { color: #1a73e8; text-decoration: none; }
+    .info-window a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  
+  <script>
+    function initMap() {
+      const center = { lat: 46.46444800909091, lng: -118.52437372727273 };
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: center
+      });
+      
+      const markers = [{"lat":47.6061389,"lng":-122.3328481,"name":"Seattle","jour":1,"titre":"Arrivée à Seattle, première immersion","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=47.6061389,-122.3328481&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=47.6061389,-122.3328481","aiImageUrl":"jour1.jpg"},{"lat":48.118146,"lng":-123.4307413,"name":"Port Angeles","jour":5,"titre":"Cap sur la Péninsule Olympique","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=48.118146,-123.4307413&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=48.118146,-123.4307413","aiImageUrl":"jour5.jpg"},{"lat":32.3902831,"lng":-81.1435743,"name":"Forks / Lake Crescent","jour":6,"titre":"Forêts pluviales et lacs mystiques","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=32.3902831,-81.1435743&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=32.3902831,-81.1435743","aiImageUrl":"jour6.jpg"},{"lat":47.2551307,"lng":-122.4419643,"name":"Ruby Beach / Tacoma","jour":7,"titre":"Plages sauvages et retour vers la civilisation","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=47.2551307,-122.4419643&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=47.2551307,-122.4419643","aiImageUrl":"jour7.jpg"},{"lat":47.5962326,"lng":-120.6614765,"name":"Leavenworth","jour":8,"titre":"Vers les Cascades et Leavenworth","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=47.5962326,-120.6614765&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=47.5962326,-120.6614765","aiImageUrl":"jour8.jpg"},{"lat":48.7718174,"lng":-121.2984648,"name":"North Cascades National Park","jour":10,"titre":"Les majestueuses North Cascades","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=48.7718174,-121.2984648&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=48.7718174,-121.2984648","aiImageUrl":"jour10.jpg"},{"lat":46.7853161,"lng":-121.7349732,"name":"Mount Rainier National Park (Paradise)","jour":11,"titre":"Vers le géant endormi: Mont Rainier","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=46.7853161,-121.7349732&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=46.7853161,-121.7349732","aiImageUrl":"jour11.jpg"},{"lat":46.8671484,"lng":-121.6998559,"name":"Mount Rainier National Park (Ohanapecosh)","jour":13,"titre":"Exploration du côté Est du Mont Rainier","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=46.8671484,-121.6998559&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=46.8671484,-121.6998559","aiImageUrl":"jour13.jpg"},{"lat":48.5342662,"lng":-123.0171242,"name":"San Juan Island (Friday Harbor)","jour":14,"titre":"Cap sur les îles San Juan","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=48.5342662,-123.0171242&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=48.5342662,-123.0171242","aiImageUrl":"jour14.jpg"},{"lat":48.55136710000001,"lng":-123.0781062,"name":"San Juan Island","jour":15,"titre":"Vie insulaire et observation marine","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=48.55136710000001,-123.0781062&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=48.55136710000001,-123.0781062","aiImageUrl":"jour15.jpg"},{"lat":48.6330816,"lng":-122.9289822,"name":"Orcas Island","jour":16,"titre":"Charme d'Orcas Island et vues panoramiques","streetViewUrl":"https://maps.googleapis.com/maps/api/streetview?size=600x400&location=48.6330816,-122.9289822&key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI","streetViewLinkUrl":"https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=48.6330816,-122.9289822","aiImageUrl":"jour16.jpg"}];
+      
+      markers.forEach((markerData) => {
+        const marker = new google.maps.Marker({
+          position: { lat: markerData.lat, lng: markerData.lng },
+          map: map,
+          title: markerData.name,
+          label: String(markerData.jour)
+        });
+        
+        const contentString = `
+          <div class="info-window">
+            <img src="${markerData.streetViewUrl}" alt="Street View de ${markerData.name}" />
+            <h3>Jour ${markerData.jour}</h3>
+            <p><strong>${markerData.name}</strong></p>
+            <p><a href="${markerData.streetViewLinkUrl}" target="_blank" rel="noopener noreferrer"><strong>${markerData.titre}</strong></a></p>
+          </div>
+        `;
+        
+        const infoWindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        
+        marker.addListener('click', () => {
+          infoWindow.open(map, marker);
+        });
+      });
+    }
+  </script>
+  
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5WUNvRC9eOjHRLt92fs4hsp0Auje3aAI&callback=initMap">
+  </script>
+</body>
+</html>
